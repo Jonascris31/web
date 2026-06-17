@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cupons de Amor ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #fff8f5; /* Warm cream romantic background */
+    color: #4a1e1e;
+    overflow-x: hidden;
+}
+
+/* FLOATING HEARTS BACKGROUND */
+.heart {
+    position: fixed;
+    top: -20px;
+    font-size: 24px;
+    color: rgba(255, 105, 135, 0.4);
+    pointer-events: none;
+    z-index: 1;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+  
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    background: linear-gradient(135deg, #fff5f6, #ffebeb);
+    border: 2px solid #ffccd5;
+    border-radius: 30px;
+    padding: 50px 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4.5rem;
+    margin: 0;
+    color: #d81b60;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    color: #c2185b;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+/* CARTA */
+.carta {
+    background: white;
+    padding: 50px 40px;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+    line-height: 2;
+    font-size: 1.1rem;
+    border: 1px solid #fff0f2;
+}
+
+.carta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #c2185b;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.carta p {
+    color: #5d2530;
+    margin-bottom: 20px;
+}
+
+.assinatura {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px dashed #ffd0d6;
+}
+
+.assinatura p {
+    font-style: italic;
+    color: #883c4b;
+}
+
+.assinatura h3 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: #d81b60;
+    margin: 10px 0;
+}
+
+/* PROGRESS BAR */
+.progresso-container {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 1px solid #fff0f2;
+}
+
+.progresso-info {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #c2185b;
+    font-size: 1.05rem;
+}
+
+.progresso-barra-bg {
+    background: #ffe5e9;
+    height: 14px;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.progresso-barra-fill {
+    background: linear-gradient(90deg, #ff8da1, #d81b60);
+    height: 100%;
+    width: 0%;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* CUPONS SECTION */
+.cupons {
+    margin-top: 60px;
+}
+
+.cupons h2 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #d81b60;
+    margin-bottom: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* TICKET LOOKING COUPONS */
+.cupom {
+    position: relative;
+    background: white;
+    border: 2px dashed #ff8da1;
+    border-radius: 20px;
+    padding: 30px 20px 25px 20px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.02);
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 180px;
+}
+
+.cupom:hover:not(.resgatado) {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(255, 141, 161, 0.15);
+    border-color: #d81b60;
+}
+
+/* Side cutouts for ticket details */
+.cupom::before, .cupom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    background: #fff8f5; /* matches body background */
+    border-radius: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.cupom::before {
+    left: -14px;
+    border-right: 2px dashed #ff8da1;
+}
+.cupom::after {
+    right: -14px;
+    border-left: 2px dashed #ff8da1;
+}
+
+.cupom:hover::before {
+    border-right-color: #d81b60;
+}
+.cupom:hover::after {
+    border-left-color: #d81b60;
+}
+
+.cupom-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.cupom:hover .cupom-emoji:not(.resgatado) {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.cupom-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #4a1e1e;
+    margin: 5px 0 10px 0;
+}
+
+.cupom-btn {
+    background: linear-gradient(135deg, #ff8da1, #d81b60);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px rgba(216, 27, 96, 0.25);
+    z-index: 3;
+}
+
+.cupom-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(216, 27, 96, 0.4);
+}
+
+/* REDEEMED STATE */
+.cupom.resgatado {
+    border-color: #cfd8dc;
+    background: #fafafa;
+    cursor: default;
+}
+
+.cupom.resgatado::before {
+    border-right: 2px dashed #cfd8dc;
+}
+.cupom.resgatado::after {
+    border-left: 2px dashed #cfd8dc;
+}
+
+.cupom.resgatado .cupom-titulo {
+    color: #b0bec5;
+    text-decoration: line-through;
+}
+
+.cupom.resgatado .cupom-emoji {
+    filter: grayscale(100%);
+    opacity: 0.4;
+    transform: none !important;
+}
+
+.cupom.resgatado .cupom-btn {
+    background: #eceff1;
+    color: #b0bec5;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.resgate-data {
+    font-size: 0.75rem;
+    color: #5c6bc0;
+    margin-top: 12px;
+    font-weight: 500;
+    font-style: italic;
+    background: #e8eaf6;
+    padding: 4px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+/* RESET BUTTON */
+.admin-actions {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.btn-reset {
+    background: transparent;
+    border: 1px solid #ffd0d6;
+    color: #d81b60;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-reset:hover {
+    background: #ffebee;
+    border-color: #ff8da1;
+}
+
+footer {
+    text-align: center;
+    margin: 60px 0 30px 0;
+    color: #888;
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>❤️ CUPONS DE AMOR ❤️</h1>
+        <h2>Para o Amor da Minha Vida</h2>
+    </div>
+
+    <div class="carta">
+
+        <h2 style="text-align:center;">Meu amor,</h2>
+
+        <p>
+        Entre todas as pessoas que passaram pela minha vida,
+        você foi a que transformou meus dias em algo especial.
+        </p>
+
+        <p>
+        Seu carinho me acolhe, seu sorriso me acalma e sua presença
+        faz qualquer momento se tornar inesquecível.
+        </p>
+
+        <p>
+        Este não é apenas um conjunto de cupons.
+        É uma pequena demonstração do quanto você é importantee para mim
+        e de quantos momentos ainda quero viver ao seu lado.
+        </p>
+
+        <p>
+        Cada vale representa uma lembrança que ainda vamos criar,
+        uma risada que ainda vamos compartilhar
+        e um motivo a mais para estarmos juntos.
+        </p>
+
+        <p>
+        Espero que você use cada um deles sabendo que foram feitos
+        pensando exclusivamente em você.
+        </p>
+
+        <p style="text-align:center; font-size:1.4rem; font-family: 'Playfair Display', serif; font-style: italic; color: #d81b60;">
+        ❤️ Porque, no final das contas,
+        o melhor presente nunca foi algo material...
+        Foi encontrar você. ❤️
+        </p>
+
+        <div class="assinatura">
+            <p>Com todo meu amor,</p>
+            <h3>Jonas Sudário</h3>
+            <p>❤️ Para o amor da minha vida ❤️</p>
+        </div>
+
+    </div>
+
+    <!-- Barra de Progresso Interativa -->
+    <div class="progresso-container">
+        <div class="progresso-info">
+            <span>🎟️ Cupons Resgatados</span>
+            <span id="progresso-texto">0 de 12 (0%)</span>
+        </div>
+        <div class="progresso-barra-bg">
+            <div class="progresso-barra-fill" id="progresso-barra"></div>
+        </div>
+    </div>
+
+    <div class="cupons">
+
+        <h2>🎟️ Seus Cupons de Amor 🎟️</h2>
+
+        <div class="grid">
+
+            <div class="cupom" data-id="presente" onclick="resgatar(this)">
+                <div class="cupom-emoji">🎁</div>
+                <div class="cupom-titulo">Vale um Presente</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="qualquer-coisa" onclick="resgatar(this)">
+                <div class="cupom-emoji">❤️</div>
+                <div class="cupom-titulo">Vale o que Você Quiser</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="segredo" onclick="resgatar(this)">
+                <div class="cupom-emoji">🤫</div>
+                <div class="cupom-titulo">Vale Contar um Segredo</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="almoco" onclick="resgatar(this)">
+                <div class="cupom-emoji">🍽️</div>
+                <div class="cupom-titulo">Vale Almoço Juntos</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="piquenique" onclick="resgatar(this)">
+                <div class="cupom-emoji">🧺</div>
+                <div class="cupom-titulo">Vale um Piquenique</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="jantar" onclick="resgatar(this)">
+                <div class="cupom-emoji">🌹</div>
+                <div class="cupom-titulo">Vale um Jantar Romântico</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="videogame" onclick="resgatar(this)">
+                <div class="cupom-emoji">🎮</div>
+                <div class="cupom-titulo">Vale Jogar Videogame</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="cinema" onclick="resgatar(this)">
+                <div class="cupom-emoji">🎬</div>
+                <div class="cupom-titulo">Vale Ida ao Cinema</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="massagem" onclick="resgatar(this)">
+                <div class="cupom-emoji">💆</div>
+                <div class="cupom-titulo">Vale Massagem Relaxante</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="abracos" onclick="resgatar(this)">
+                <div class="cupom-emoji">🤗</div>
+                <div class="cupom-titulo">Vale Abraços Carinhosos</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="declaracao" onclick="resgatar(this)">
+                <div class="cupom-emoji">💌</div>
+                <div class="cupom-titulo">Vale Declaração Apaixonada</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+            <div class="cupom" data-id="cafe-cama" onclick="resgatar(this)">
+                <div class="cupom-emoji">☕</div>
+                <div class="cupom-titulo">Vale Café da Manhã na Cama</div>
+                <button class="cupom-btn">Resgatar</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Botão Administrativo para Resetar Cupons -->
+    <div class="admin-actions">
+        <button class="btn-reset" onclick="confirmarReset()">🔄 Recomeçar Cupons</button>
+    </div>
+
+    <footer>
+        Feito com ❤️ por Jonas Sudário
+    </footer>
+
+</div>
+
+<script> 
+// ESTADO DOS CUPONS (LOCAL STORAGE)
+let cuponsEstado = JSON.parse(localStorage.getItem("cuponsEvyState")) || {};
+
+document.addEventListener("DOMContentLoaded", () => {
+    carregarEstado();
+    atualizarProgresso();
+});
+
+function carregarEstado() {
+    const cupons = document.querySelectorAll(".cupom");
+    cupons.forEach(cupom => {
+        const id = cupom.getAttribute("data-id");
+        if (cuponsEstado[id]) {
+            marcarComoResgatadoDOM(cupom, cuponsEstado[id].data);
+        }
+    });
+}
+
+function marcarComoResgatadoDOM(cupom, dataFormatada) {
+    cupom.classList.add("resgatado");
+    const btn = cupom.querySelector(".cupom-btn");
+    if (btn) {
+        btn.innerText = "Resgatado";
+        btn.disabled = true;
+    }
+    
+    let infoData = cupom.querySelector(".resgate-data");
+    if (!infoData) {
+        infoData = document.createElement("div");
+        infoData.classList.add("resgate-data");
+        cupom.appendChild(infoData);
+    }
+    infoData.innerHTML = `Usado em ${dataFormatada}`;
+}
+
+function atualizarProgresso() {
+    const total = document.querySelectorAll(".cupom").length;
+    const resgatados = Object.keys(cuponsEstado).length;
+    const porcentagem = total > 0 ? Math.round((resgatados / total) * 100) : 0;
+    
+    const textoProgresso = document.getElementById("progresso-texto");
+    const barraProgresso = document.getElementById("progresso-barra");
+    
+    if (textoProgresso) {
+        textoProgresso.innerText = `${resgatados} de ${total} (${porcentagem}%)`;
+    }
+    if (barraProgresso) {
+        barraProgresso.style.width = `${porcentagem}%`;
+    }
+}
+
+// RESGATAR CUPOM
+function resgatar(element) {
+    if (element.classList.contains("resgatado")) {
+        alert("Esse cupom já foi usado! 💔");
+        return;
+    }
+
+    const id = element.getAttribute("data-id");
+    const titulo = element.querySelector(".cupom-titulo").innerText;
+    
+    const agora = new Date();
+    const dataFormatada = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+    
+    // Atualizar no LocalStorage
+    cuponsEstado[id] = {
+        resgatado: true,
+        data: dataFormatada
+    };
+    localStorage.setItem("cuponsEvyState", JSON.stringify(cuponsEstado));
+
+    // Atualizar DOM
+    marcarComoResgatadoDOM(element, dataFormatada);
+    
+    // Explosão de Corações (Confete)
+    explodirCoracoes(element);
+    
+    // Atualizar progresso
+    atualizarProgresso();
+
+    // Redirecionar para WhatsApp do Jonas de forma imediata
+    const whatsappNumber = "5531995828076";
+    const mensagem = `Oi meu amor! Acabei de resgatar o cupom: *${titulo}* ❤️🎟️`;
+    const url = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(mensagem)}`;
+    
+    setTimeout(() => {
+        window.open(url, '_blank');
+    }, 800); // Pequeno atraso para a animação do confete e da barra terminar
+}
+
+// ANIMAÇÃO DE CONFETE DE CORAÇÕES
+function explodirCoracoes(element) {
+    const rect = element.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    
+    for (let i = 0; i < 35; i++) {
+        const p = document.createElement("div");
+        p.innerHTML = ["❤️", "💖", "💝", "💕", "🌸"][Math.floor(Math.random() * 5)];
+        p.style.position = "fixed";
+        p.style.left = x + "px";
+        p.style.top = y + "px";
+        p.style.fontSize = (Math.random() * 15 + 12) + "px";
+        p.style.pointerEvents = "none";
+        p.style.zIndex = "9999";
+        
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 120 + 60;
+        const dx = Math.cos(angle) * velocity;
+        const dy = Math.sin(angle) * velocity;
+        
+        document.body.appendChild(p);
+        
+        const startTime = Date.now();
+        const duration = 1200 + Math.random() * 800;
+        
+        function update() {
+            const elapsed = Date.now() - startTime;
+            const progress = elapsed / duration;
+            if (progress >= 1) {
+                p.remove();
+            } else {
+                // Efeito gravidade
+                const currentY = y + dy * progress + 0.5 * 180 * progress * progress;
+                const currentX = x + dx * progress;
+                p.style.transform = `translate(${currentX - x}px, ${currentY - y}px) rotate(${progress * 480}deg)`;
+                p.style.opacity = 1 - progress;
+                requestAnimationFrame(update);
+            }
+        }
+        requestAnimationFrame(update);
+    }
+}
+
+// CORAÇÕES CAINDO DE BACKGROUND
+function criarCoracao(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = ["❤️", "💖", "💕", "🌸", "💝"][Math.floor(Math.random() * 5)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 15) + "px";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    heart.style.opacity = 0.3 + Math.random() * 0.5;
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 10000);
+}
+
+setInterval(criarCoracao, 450);
+
+// RECOMEÇAR OS CUPONS
+function confirmarReset() {
+    const resposta = prompt("Para confirmar o reinício, digite o nome de quem te deu esses cupons (com a primeira letra maiúscula):");
+    if (resposta === "Jonas") {
+        localStorage.removeItem("cuponsEvyState");
+        alert("Todos os cupons foram restaurados com carinho! ❤️");
+        location.reload();
+    } else if (resposta !== null) {
+        alert("Nome incorreto! Tente o nome do amor da sua vida. 😉");
+    }
+}
+</script>
+</body>
+</html>
+
